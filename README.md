@@ -1,3 +1,31 @@
+# HealthSphere — Experimental predictive AI
+
+## Current status — Stage 3
+
+Foundation/governance only, delivered for review on 2026-09-13. Raw Synthea CSVs and placeholder source/notebook/model directories exist. No target has been approved, and no model, preprocessing pipeline, inference runtime, tests or CI exists yet. Documentation, repo-local skills and support templates describe future approved work; there are no application install/run commands to execute yet.
+
+Exactly four independent repositories: browser → frontend → backend → PostgreSQL; backend → AI and backend → Agent. Frontend never calls specialized services directly. Backend owns application data/access, while each repository owns its own architecture/governance. Cross-repository delivery belongs in GitHub Issues/Project after approval.
+
+One account = one health profile; English MVP. Guardian/family/multi-profile access is excluded. ML is experimental and cannot claim clinical validity. Agent never creates predictive scores. See [AGENTS.md](AGENTS.md) before work.
+
+## Documentation
+
+- [Ai Architecture](docs/architecture/AI_ARCHITECTURE.md)
+- [Dataset Strategy](docs/data/DATASET_STRATEGY.md)
+- [Adlc](docs/engineering/ADLC.md)
+- [Model Card](docs/evaluation/MODEL_CARD.md)
+- [Modeling Strategy](docs/ml/MODELING_STRATEGY.md)
+- [Testing Strategy](docs/testing/TESTING_STRATEGY.md)
+- [Proposed GitHub issues](docs/planning/PROPOSED_ISSUES.md)
+
+## Local configuration and delivery
+
+`.env.example` documents placeholders only; `.env` is ignored and must never be committed. Runtime tickets must validate required configuration before startup. Use short-lived branches → PR → main, no develop; no silent merge. The approved roadmap exists as live GitHub issues; issues coordinate work but do not by themselves authorize implementation.
+
+## Preserved Phase 0 planning context
+
+The following earlier planning detail is retained; approved foundation docs above govern current scope and clearly mark unresolved choices.
+
 # 🧠 HealthSphere — Predictive AI & Machine Learning
 
 ## 📌 Overview
@@ -153,7 +181,9 @@ Synthetic patients can be used to test the complete HealthSphere prediction work
 
 ---
 
-# 📂 Repository Structure
+# 📂 Repository Structure (planned in Phase 0)
+
+The diagram below records the original planned structure, not implemented files. Current source, notebooks and models contain `.gitkeep` placeholders; no runtime, tests or dependency manifest exists.
 
 ```text
 healthsphere-ai/
@@ -307,15 +337,7 @@ This decision will therefore be finalized before model training.
 
 # 🤖 Model Development
 
-Several interpretable Machine Learning algorithms may be evaluated, including:
-
-- Logistic Regression
-- Random Forest
-- Other lightweight supervised-learning models if justified
-
-Candidate models will be compared using appropriate evaluation metrics.
-
-The final model will be selected based on experimental results rather than selecting an algorithm in advance.
+XGBoost is the approved primary predictive model. A simple interpretable baseline (such as Logistic Regression) will be retained for comparison. Target validation must pass before fitting any model; release depends on measured evaluation rather than the algorithm choice alone.
 
 ---
 
