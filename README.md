@@ -1,6 +1,6 @@
 # HealthSphere — Experimental predictive AI
 
-## Current status — Stage 3
+## Foundation status
 
 Foundation/governance only, delivered for review on 2026-09-13. Raw Synthea CSVs and placeholder source/notebook/model directories exist. No target has been approved, and no model, preprocessing pipeline, inference runtime, tests or CI exists yet. Documentation, repo-local skills and support templates describe future approved work; there are no application install/run commands to execute yet.
 
