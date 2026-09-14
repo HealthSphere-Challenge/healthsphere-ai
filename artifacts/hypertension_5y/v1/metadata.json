@@ -1,0 +1,83 @@
+{
+  "artifact_sha256": {
+    "metrics.json": "fef3500372474cb90ffaeace429567cb5b5ce728a2a754f4bac2d32c8bc12b2e",
+    "model.json": "d99802b25a971feaf358097acf4266149054fbfeed8bf21e810f995fb55f69c3",
+    "preprocessing.joblib": "586183f3298d8b1e17179b76f8ad9c9b1e71444033c360c2f3961fc114aef27c",
+    "split_manifest.json": "86eb3a59996f06105e7705d23516cd3e276c7f486439605ddbd2ad5e3fef12e5"
+  },
+  "calibration_status": "none; validation evidence did not justify fitting a calibrator with only 24 positives",
+  "code_commit": "5ec139c078a9cfecb539b37ed0dd053bf63eeefc",
+  "dataset": {
+    "clinician_seed": 20260914,
+    "deceased": 724,
+    "exported_histories": 5724,
+    "internal_version": "v3.4.0-18-ga07a65555",
+    "kind": "Synthea synthetic Massachusetts CSV",
+    "patient_seed": 20260913,
+    "reference_date": 20260913,
+    "release_asset": "Synthea 4.0.0",
+    "requested_living_population": 5000
+  },
+  "dependencies": {
+    "numpy": "2.3.3",
+    "python": "3.13.11",
+    "scikit_learn": "1.7.2",
+    "xgboost": "3.0.5"
+  },
+  "feature_order": [
+    "age_years",
+    "systolic_blood_pressure",
+    "diastolic_blood_pressure",
+    "heart_rate",
+    "bmi",
+    "sex_at_birth",
+    "smoking_status"
+  ],
+  "feature_schema_version": "hypertension_features_v1",
+  "hyperparameters": {
+    "colsample_bytree": 0.9,
+    "learning_rate": 0.05,
+    "max_depth": 2,
+    "min_child_weight": 1,
+    "n_estimators": 150,
+    "random_state": 20260915,
+    "reg_alpha": 0.0,
+    "reg_lambda": 1.0,
+    "scale_pos_weight": 19.324324324324323,
+    "subsample": 0.9
+  },
+  "model_class": "XGBClassifier",
+  "model_version": "hypertension_5y_v1.0.0",
+  "output": "experimental probability of a first recorded essential-hypertension event within 1825 days after the eligible index encounter",
+  "preprocessing_version": "hypertension_preprocessing_v1",
+  "primary_metrics": {
+    "test_pr_auc": 0.15615303958613844,
+    "test_roc_auc": 0.628713768115942,
+    "validation_pr_auc": 0.11736150433888345
+  },
+  "split_counts": {
+    "test": {
+      "n": 484,
+      "negative_n": 460,
+      "positive_n": 24,
+      "prevalence": 0.049586776859504134
+    },
+    "train": {
+      "n": 2256,
+      "negative_n": 2145,
+      "positive_n": 111,
+      "prevalence": 0.04920212765957447
+    },
+    "validation": {
+      "n": 484,
+      "negative_n": 460,
+      "positive_n": 24,
+      "prevalence": 0.049586776859504134
+    }
+  },
+  "split_seed": 20260915,
+  "target_id": "incident_essential_hypertension_5y_v1",
+  "threshold": 0.6089538335800171,
+  "threshold_purpose": "experimental evaluation only; not a clinical cutoff",
+  "training_date_utc": "2026-09-14"
+}
