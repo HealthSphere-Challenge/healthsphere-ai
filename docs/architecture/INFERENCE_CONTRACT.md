@@ -1,6 +1,8 @@
 # Backend–AI inference contract
 
-Status: stable transport is **APPROVED CONTRACT for HS-002; documentation only**. Model meaning is **PENDING HS-010**. No endpoint, model, feature pipeline, score, label, threshold, or artifact is implemented here.
+Status: stable HS-002 transport is the **AUTHORITATIVE CONTRACT**. HS-011 implements the
+trained hypertension model behind that contract. The earlier Stage 10 `/predictions`
+wording was superseded; no competing endpoint exists.
 
 Contract revision: `phase1-hs002-2026-09-13`. The backend contract is the application-level companion; AI owns the Pydantic producer/consumer schemas for this service boundary.
 
@@ -13,11 +15,22 @@ The backend alone calls `POST /internal/v1/inferences`. Requests use a service-s
   "schema_version": "1.0",
   "request_id": "c4a760a8-7d0b-4f98-9652-244be1ebcc2e",
   "subject_ref": "f630d635-64e2-432b-8175-60f61d220d4d",
-  "features": { "pending_hs_010": true }
+  "features": {
+    "age_years": 42,
+    "systolic_blood_pressure": 128,
+    "diastolic_blood_pressure": 82,
+    "heart_rate": 76,
+    "bmi": 24.7,
+    "sex_at_birth": "female",
+    "smoking_status": "never"
+  }
 }
 ```
 
-`subject_ref` is a pseudonymous request/service reference, not the application user ID. The exact feature object is **PENDING HS-010**. The AI service receives no session cookie, email, conversation, unrestricted profile, or direct database access.
+`subject_ref` is a pseudonymous request/service reference, not the application user ID. Only
+the nested feature object enters preprocessing; transport fields never enter the model matrix.
+The AI service receives no session cookie, email, conversation, unrestricted profile, or
+direct database access. `X-Request-ID` must contain the same UUIDv4 as the envelope.
 
 ## Response states — APPROVED CONTRACT
 
@@ -31,7 +44,7 @@ AI returns exactly one state: `completed`, `insufficient_data`, `ineligible`, or
   "result": null,
   "reason": {
     "code": "minimum_inputs_missing",
-    "missing_fields": ["pending_hs_010"]
+    "missing_fields": ["age_years"]
   },
   "provenance": null
 }
@@ -51,9 +64,10 @@ For `unavailable`, `reason.code` may identify a safe category such as `model_una
 }
 ```
 
-## Completed result — PENDING HS-010
+## Completed result — HS-011
 
-A future completed response has this structural obligation, but no field represented by a `pending_hs_010` placeholder has approved meaning or a usable runtime value:
+The completed response preserves the HS-002 envelope and exposes the frozen experimental
+score with explicit calibration limitations:
 
 ```json
 {
@@ -61,28 +75,36 @@ A future completed response has this structural obligation, but no field represe
   "request_id": "c4a760a8-7d0b-4f98-9652-244be1ebcc2e",
   "status": "completed",
   "result": {
-    "target": "pending_hs_010",
-    "population": "pending_hs_010",
-    "horizon": "pending_hs_010",
-    "score": null,
-    "score_semantics": "pending_hs_010",
+    "target": "incident_essential_hypertension_5y_v1",
+    "population": "eligible adult at first paired-BP encounter after 365 days history",
+    "horizon": "1825 days after index encounter stop",
+    "score": 0.1234,
+    "score_type": "uncalibrated_experimental_probability_estimate",
+    "calibrated": false,
     "label": null,
     "explanation": null,
     "limitations": []
   },
   "provenance": {
-    "model_name": "pending_hs_010",
-    "model_version": "pending_hs_010",
-    "feature_schema_version": "pending_hs_010",
-    "preprocessing_version": "pending_hs_010",
+    "model_name": "HealthSphere experimental hypertension XGBoost",
+    "model_version": "hypertension_5y_v1.0.0",
+    "feature_schema_version": "hypertension_features_v1",
+    "preprocessing_version": "hypertension_preprocessing_v1",
     "calibration_version": null,
-    "explanation_method": "pending_hs_010",
+    "explanation_method": "global_native_xgboost_gain_only",
+    "prediction_horizon_days": 1825,
+    "calibrated": false,
+    "calibration_status": "uncalibrated; trained and evaluated on synthetic Synthea data",
     "generated_at": "2026-09-13T09:05:43.000Z"
   }
 }
 ```
 
-HS-010 must approve the assessment target, eligible population, prediction horizon, feature schema, minimum inputs, score semantics, calibration, risk labels, thresholds, and explanation method before `completed` is implementable. Do not fabricate representative values, treat global feature importance as individual causation, or claim clinical validity.
+Required model inputs are age and paired systolic/diastolic BP. Their absence produces
+`insufficient_data`; an age below the approved adult population produces `ineligible`.
+Optional numeric inputs may be null and use the frozen preprocessing. Optional categories
+default to `unknown`. The score is uncalibrated synthetic-data evidence. No label, diagnosis,
+clinical threshold, or patient-specific explanation is produced.
 
 ## Compatibility and tests
 
