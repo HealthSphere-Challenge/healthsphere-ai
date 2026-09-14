@@ -111,6 +111,14 @@ def dataset_root(tmp_path: Path) -> Path:
                 "VALUE": "115",
                 "UNITS": "mm[Hg]",
             },
+            {
+                "DATE": "2024-01-02",
+                "PATIENT": "p2",
+                "ENCOUNTER": "p2-index",
+                "CODE": "8462-4",
+                "VALUE": "75",
+                "UNITS": "mm[Hg]",
+            },
         ],
     )
     write_csv(

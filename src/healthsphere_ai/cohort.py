@@ -121,6 +121,11 @@ def load_dataset(root: Path) -> Dataset:
             )
     for rows in encounters.values():
         rows.sort(key=lambda item: (item.start, item.stop, item.encounter_id))
+    encounters_by_id = {
+        encounter.encounter_id: encounter
+        for patient_encounters in encounters.values()
+        for encounter in patient_encounters
+    }
 
     code_to_feature = {code: feature for feature, codes in FEATURE_CODES.items() for code in codes}
     observations: dict[str, list[Observation]] = defaultdict(list)
@@ -139,7 +144,13 @@ def load_dataset(root: Path) -> Dataset:
                 row["UNITS"],
             )
             observations[observation.patient_id].append(observation)
-            by_encounter[observation.encounter_id].add(feature)
+            linked_encounter = encounters_by_id.get(observation.encounter_id)
+            if (
+                linked_encounter is not None
+                and linked_encounter.patient_id == observation.patient_id
+                and linked_encounter.start <= observation.observed_at <= linked_encounter.stop
+            ):
+                by_encounter[observation.encounter_id].add(feature)
     for rows in observations.values():
         rows.sort(key=lambda item: (item.observed_at, item.encounter_id, item.feature))
 
