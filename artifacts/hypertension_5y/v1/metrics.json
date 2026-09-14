@@ -1,0 +1,690 @@
+{
+  "bootstrap": {
+    "confidence_intervals_95": {
+      "brier_score": {
+        "lower": 0.19947625830945478,
+        "upper": 0.2255801380670692
+      },
+      "f1": {
+        "lower": 0.05309734513274336,
+        "upper": 0.2033898305084746
+      },
+      "pr_auc": {
+        "lower": 0.059352659752984045,
+        "upper": 0.29821234412512
+      },
+      "precision": {
+        "lower": 0.033707865168539325,
+        "upper": 0.13043478260869565
+      },
+      "roc_auc": {
+        "lower": 0.5219904891304349,
+        "upper": 0.7287182971014492
+      },
+      "sensitivity": {
+        "lower": 0.125,
+        "upper": 0.4583333333333333
+      },
+      "specificity": {
+        "lower": 0.7869565217391304,
+        "upper": 0.8586956521739131
+      }
+    },
+    "method": "patient-level stratified bootstrap; resample each outcome class with replacement",
+    "replicates": 2000,
+    "seed": 20260916,
+    "single_class_samples_skipped": 0
+  },
+  "dataset": {
+    "n": 3224,
+    "negative_n": 3065,
+    "positive_n": 159,
+    "prevalence": 0.04931761786600496
+  },
+  "explainability": {
+    "feature_importance": {
+      "missingindicator_x3": 0.0,
+      "missingindicator_x4": 0.0,
+      "x0": 0.12879391014575958,
+      "x1": 0.09302730858325958,
+      "x2": 0.10138154774904251,
+      "x3": 0.07387684285640717,
+      "x4": 0.08614347875118256,
+      "x5_female": 0.1855160892009735,
+      "x5_male": 0.0,
+      "x6_current": 0.04311234503984451,
+      "x6_former": 0.09541668742895126,
+      "x6_never": 0.1927318572998047,
+      "x6_unknown": 0.0
+    },
+    "method": "native XGBoost gain importance",
+    "scope": "global model influence; neither causal nor patient-specific"
+  },
+  "hyperparameter_search": [
+    {
+      "parameters": {
+        "colsample_bytree": 1.0,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "min_child_weight": 1,
+        "n_estimators": 100,
+        "reg_alpha": 0.0,
+        "reg_lambda": 1.0,
+        "subsample": 1.0
+      },
+      "validation": {
+        "brier_score": 0.221522622300073,
+        "confusion_matrix": {
+          "fn": 18,
+          "fp": 31,
+          "tn": 429,
+          "tp": 6
+        },
+        "f1": 0.19672131147540983,
+        "n": 484,
+        "negative_n": 460,
+        "positive_n": 24,
+        "pr_auc": 0.10346915921824264,
+        "precision": 0.16216216216216217,
+        "prevalence": 0.049586776859504134,
+        "roc_auc": 0.7133152173913043,
+        "sensitivity": 0.25,
+        "specificity": 0.9326086956521739,
+        "threshold": 0.6183969378471375
+      }
+    },
+    {
+      "parameters": {
+        "colsample_bytree": 0.9,
+        "learning_rate": 0.05,
+        "max_depth": 2,
+        "min_child_weight": 1,
+        "n_estimators": 150,
+        "reg_alpha": 0.0,
+        "reg_lambda": 1.0,
+        "subsample": 0.9
+      },
+      "validation": {
+        "brier_score": 0.1971133997082476,
+        "confusion_matrix": {
+          "fn": 14,
+          "fp": 73,
+          "tn": 387,
+          "tp": 10
+        },
+        "f1": 0.18691588785046728,
+        "n": 484,
+        "negative_n": 460,
+        "positive_n": 24,
+        "pr_auc": 0.11736150433888345,
+        "precision": 0.12048192771084337,
+        "prevalence": 0.049586776859504134,
+        "roc_auc": 0.6943840579710145,
+        "sensitivity": 0.4166666666666667,
+        "specificity": 0.841304347826087,
+        "threshold": 0.6089538335800171
+      }
+    },
+    {
+      "parameters": {
+        "colsample_bytree": 1.0,
+        "learning_rate": 0.05,
+        "max_depth": 2,
+        "min_child_weight": 3,
+        "n_estimators": 200,
+        "reg_alpha": 0.1,
+        "reg_lambda": 1.0,
+        "subsample": 0.9
+      },
+      "validation": {
+        "brier_score": 0.19118247889796525,
+        "confusion_matrix": {
+          "fn": 13,
+          "fp": 76,
+          "tn": 384,
+          "tp": 11
+        },
+        "f1": 0.1981981981981982,
+        "n": 484,
+        "negative_n": 460,
+        "positive_n": 24,
+        "pr_auc": 0.08468158239981942,
+        "precision": 0.12643678160919541,
+        "prevalence": 0.049586776859504134,
+        "roc_auc": 0.6668478260869565,
+        "sensitivity": 0.4583333333333333,
+        "specificity": 0.8347826086956521,
+        "threshold": 0.6121171116828918
+      }
+    },
+    {
+      "parameters": {
+        "colsample_bytree": 0.9,
+        "learning_rate": 0.05,
+        "max_depth": 3,
+        "min_child_weight": 1,
+        "n_estimators": 100,
+        "reg_alpha": 0.0,
+        "reg_lambda": 1.0,
+        "subsample": 1.0
+      },
+      "validation": {
+        "brier_score": 0.1933667650573296,
+        "confusion_matrix": {
+          "fn": 15,
+          "fp": 53,
+          "tn": 407,
+          "tp": 9
+        },
+        "f1": 0.20930232558139536,
+        "n": 484,
+        "negative_n": 460,
+        "positive_n": 24,
+        "pr_auc": 0.09899611074867685,
+        "precision": 0.14516129032258066,
+        "prevalence": 0.049586776859504134,
+        "roc_auc": 0.6962862318840579,
+        "sensitivity": 0.375,
+        "specificity": 0.8847826086956522,
+        "threshold": 0.6158689260482788
+      }
+    },
+    {
+      "parameters": {
+        "colsample_bytree": 0.9,
+        "learning_rate": 0.03,
+        "max_depth": 3,
+        "min_child_weight": 3,
+        "n_estimators": 150,
+        "reg_alpha": 0.1,
+        "reg_lambda": 1.0,
+        "subsample": 0.9
+      },
+      "validation": {
+        "brier_score": 0.1891520110161469,
+        "confusion_matrix": {
+          "fn": 15,
+          "fp": 57,
+          "tn": 403,
+          "tp": 9
+        },
+        "f1": 0.2,
+        "n": 484,
+        "negative_n": 460,
+        "positive_n": 24,
+        "pr_auc": 0.08748181719783822,
+        "precision": 0.13636363636363635,
+        "prevalence": 0.049586776859504134,
+        "roc_auc": 0.6818840579710145,
+        "sensitivity": 0.375,
+        "specificity": 0.8760869565217392,
+        "threshold": 0.6167789101600647
+      }
+    },
+    {
+      "parameters": {
+        "colsample_bytree": 0.9,
+        "learning_rate": 0.03,
+        "max_depth": 3,
+        "min_child_weight": 5,
+        "n_estimators": 200,
+        "reg_alpha": 0.1,
+        "reg_lambda": 1.0,
+        "subsample": 0.8
+      },
+      "validation": {
+        "brier_score": 0.17842652806823917,
+        "confusion_matrix": {
+          "fn": 9,
+          "fp": 124,
+          "tn": 336,
+          "tp": 15
+        },
+        "f1": 0.18404907975460122,
+        "n": 484,
+        "negative_n": 460,
+        "positive_n": 24,
+        "pr_auc": 0.08500483683458314,
+        "precision": 0.1079136690647482,
+        "prevalence": 0.049586776859504134,
+        "roc_auc": 0.6652173913043479,
+        "sensitivity": 0.625,
+        "specificity": 0.7304347826086957,
+        "threshold": 0.5102458596229553
+      }
+    },
+    {
+      "parameters": {
+        "colsample_bytree": 0.8,
+        "learning_rate": 0.03,
+        "max_depth": 4,
+        "min_child_weight": 3,
+        "n_estimators": 100,
+        "reg_alpha": 0.5,
+        "reg_lambda": 1.0,
+        "subsample": 0.9
+      },
+      "validation": {
+        "brier_score": 0.1799964334619844,
+        "confusion_matrix": {
+          "fn": 10,
+          "fp": 105,
+          "tn": 355,
+          "tp": 14
+        },
+        "f1": 0.1958041958041958,
+        "n": 484,
+        "negative_n": 460,
+        "positive_n": 24,
+        "pr_auc": 0.08278383248913504,
+        "precision": 0.11764705882352941,
+        "prevalence": 0.049586776859504134,
+        "roc_auc": 0.6774456521739131,
+        "sensitivity": 0.5833333333333334,
+        "specificity": 0.7717391304347826,
+        "threshold": 0.5522328019142151
+      }
+    },
+    {
+      "parameters": {
+        "colsample_bytree": 0.8,
+        "learning_rate": 0.02,
+        "max_depth": 4,
+        "min_child_weight": 5,
+        "n_estimators": 150,
+        "reg_alpha": 0.5,
+        "reg_lambda": 1.0,
+        "subsample": 0.8
+      },
+      "validation": {
+        "brier_score": 0.17575993071888826,
+        "confusion_matrix": {
+          "fn": 11,
+          "fp": 118,
+          "tn": 342,
+          "tp": 13
+        },
+        "f1": 0.16774193548387098,
+        "n": 484,
+        "negative_n": 460,
+        "positive_n": 24,
+        "pr_auc": 0.07860798272815482,
+        "precision": 0.09923664122137404,
+        "prevalence": 0.049586776859504134,
+        "roc_auc": 0.6615036231884058,
+        "sensitivity": 0.5416666666666666,
+        "specificity": 0.7434782608695653,
+        "threshold": 0.523912250995636
+      }
+    }
+  ],
+  "selection": {
+    "calibration_policy": "none; validation evidence did not justify fitting a calibrator with only 24 positives",
+    "model": "xgboost",
+    "rule": "highest validation PR-AUC; prefer logistic unless XGBoost improves by more than 0.02",
+    "threshold": 0.6089538335800171,
+    "threshold_objective": "maximum validation F1"
+  },
+  "split": {
+    "test": {
+      "n": 484,
+      "negative_n": 460,
+      "positive_n": 24,
+      "prevalence": 0.049586776859504134
+    },
+    "train": {
+      "n": 2256,
+      "negative_n": 2145,
+      "positive_n": 111,
+      "prevalence": 0.04920212765957447
+    },
+    "validation": {
+      "n": 484,
+      "negative_n": 460,
+      "positive_n": 24,
+      "prevalence": 0.049586776859504134
+    }
+  },
+  "subgroups": {
+    "age_group": {
+      "18-39": {
+        "evidence": "descriptive synthetic subgroup only",
+        "metrics": {
+          "brier_score": 0.15371824824941335,
+          "confusion_matrix": {
+            "fn": 11,
+            "fp": 13,
+            "tn": 232,
+            "tp": 1
+          },
+          "f1": 0.07692307692307693,
+          "n": 257,
+          "negative_n": 245,
+          "positive_n": 12,
+          "pr_auc": 0.16713960884780507,
+          "precision": 0.07142857142857142,
+          "prevalence": 0.04669260700389105,
+          "roc_auc": 0.6901360544217687,
+          "sensitivity": 0.08333333333333333,
+          "specificity": 0.9469387755102041,
+          "threshold": 0.6089538335800171
+        },
+        "n": 257,
+        "positive_n": 12
+      },
+      "40-64": {
+        "evidence": "descriptive synthetic subgroup only",
+        "metrics": {
+          "brier_score": 0.31940751384418664,
+          "confusion_matrix": {
+            "fn": 5,
+            "fp": 68,
+            "tn": 111,
+            "tp": 6
+          },
+          "f1": 0.1411764705882353,
+          "n": 190,
+          "negative_n": 179,
+          "positive_n": 11,
+          "pr_auc": 0.25065544589719474,
+          "precision": 0.08108108108108109,
+          "prevalence": 0.05789473684210526,
+          "roc_auc": 0.5449466734382935,
+          "sensitivity": 0.5454545454545454,
+          "specificity": 0.6201117318435754,
+          "threshold": 0.6089538335800171
+        },
+        "n": 190,
+        "positive_n": 11
+      },
+      "65+": {
+        "evidence": "insufficient evidence",
+        "metrics": null,
+        "n": 37,
+        "positive_n": 1
+      }
+    },
+    "sex_at_birth": {
+      "female": {
+        "evidence": "descriptive synthetic subgroup only",
+        "metrics": {
+          "brier_score": 0.2142756388855464,
+          "confusion_matrix": {
+            "fn": 9,
+            "fp": 47,
+            "tn": 198,
+            "tp": 3
+          },
+          "f1": 0.0967741935483871,
+          "n": 257,
+          "negative_n": 245,
+          "positive_n": 12,
+          "pr_auc": 0.1566187630952645,
+          "precision": 0.06,
+          "prevalence": 0.04669260700389105,
+          "roc_auc": 0.5833333333333333,
+          "sensitivity": 0.25,
+          "specificity": 0.8081632653061225,
+          "threshold": 0.6089538335800171
+        },
+        "n": 257,
+        "positive_n": 12
+      },
+      "male": {
+        "evidence": "descriptive synthetic subgroup only",
+        "metrics": {
+          "brier_score": 0.21105174688964426,
+          "confusion_matrix": {
+            "fn": 8,
+            "fp": 34,
+            "tn": 181,
+            "tp": 4
+          },
+          "f1": 0.16,
+          "n": 227,
+          "negative_n": 215,
+          "positive_n": 12,
+          "pr_auc": 0.17209961257932874,
+          "precision": 0.10526315789473684,
+          "prevalence": 0.05286343612334802,
+          "roc_auc": 0.6856589147286822,
+          "sensitivity": 0.3333333333333333,
+          "specificity": 0.8418604651162791,
+          "threshold": 0.6089538335800171
+        },
+        "n": 227,
+        "positive_n": 12
+      }
+    }
+  },
+  "test": {
+    "brier_score": 0.2127636068957328,
+    "calibration_curve": [
+      {
+        "event_rate": 0.0,
+        "lower": 0.0,
+        "mean_probability": 0.13818924129009247,
+        "n": 85,
+        "upper": 0.2
+      },
+      {
+        "event_rate": 0.0603448275862069,
+        "lower": 0.2,
+        "mean_probability": 0.30424654483795166,
+        "n": 116,
+        "upper": 0.4
+      },
+      {
+        "event_rate": 0.0427807486631016,
+        "lower": 0.4,
+        "mean_probability": 0.5158846378326416,
+        "n": 187,
+        "upper": 0.6000000000000001
+      },
+      {
+        "event_rate": 0.09375,
+        "lower": 0.6000000000000001,
+        "mean_probability": 0.6464813351631165,
+        "n": 96,
+        "upper": 0.8
+      },
+      {
+        "event_rate": null,
+        "lower": 0.8,
+        "mean_probability": null,
+        "n": 0,
+        "upper": 1.0
+      }
+    ],
+    "confusion_matrix": {
+      "fn": 17,
+      "fp": 81,
+      "tn": 379,
+      "tp": 7
+    },
+    "f1": 0.125,
+    "n": 484,
+    "negative_n": 460,
+    "positive_n": 24,
+    "pr_auc": 0.15615303958613844,
+    "precision": 0.07954545454545454,
+    "prevalence": 0.049586776859504134,
+    "roc_auc": 0.628713768115942,
+    "sensitivity": 0.2916666666666667,
+    "specificity": 0.8239130434782609,
+    "threshold": 0.6089538335800171
+  },
+  "validation": {
+    "dummy": {
+      "brier_score": 0.0471280763751969,
+      "calibration_curve": [
+        {
+          "event_rate": 0.049586776859504134,
+          "lower": 0.0,
+          "mean_probability": 0.04920212765957446,
+          "n": 484,
+          "upper": 0.2
+        },
+        {
+          "event_rate": null,
+          "lower": 0.2,
+          "mean_probability": null,
+          "n": 0,
+          "upper": 0.4
+        },
+        {
+          "event_rate": null,
+          "lower": 0.4,
+          "mean_probability": null,
+          "n": 0,
+          "upper": 0.6000000000000001
+        },
+        {
+          "event_rate": null,
+          "lower": 0.6000000000000001,
+          "mean_probability": null,
+          "n": 0,
+          "upper": 0.8
+        },
+        {
+          "event_rate": null,
+          "lower": 0.8,
+          "mean_probability": null,
+          "n": 0,
+          "upper": 1.0
+        }
+      ],
+      "confusion_matrix": {
+        "fn": 0,
+        "fp": 460,
+        "tn": 0,
+        "tp": 24
+      },
+      "f1": 0.09448818897637795,
+      "n": 484,
+      "negative_n": 460,
+      "positive_n": 24,
+      "pr_auc": 0.049586776859504134,
+      "precision": 0.049586776859504134,
+      "prevalence": 0.049586776859504134,
+      "roc_auc": 0.5,
+      "sensitivity": 1.0,
+      "specificity": 0.0,
+      "threshold": 0.0
+    },
+    "logistic_regression": {
+      "brier_score": 0.2398526652805,
+      "calibration_curve": [
+        {
+          "event_rate": null,
+          "lower": 0.0,
+          "mean_probability": null,
+          "n": 0,
+          "upper": 0.2
+        },
+        {
+          "event_rate": 0.009615384615384616,
+          "lower": 0.2,
+          "mean_probability": 0.342365287724989,
+          "n": 104,
+          "upper": 0.4
+        },
+        {
+          "event_rate": 0.058997050147492625,
+          "lower": 0.4,
+          "mean_probability": 0.5066436175781855,
+          "n": 339,
+          "upper": 0.6000000000000001
+        },
+        {
+          "event_rate": 0.075,
+          "lower": 0.6000000000000001,
+          "mean_probability": 0.6464036509931436,
+          "n": 40,
+          "upper": 0.8
+        },
+        {
+          "event_rate": 0.0,
+          "lower": 0.8,
+          "mean_probability": 0.8271043873793076,
+          "n": 1,
+          "upper": 1.0
+        }
+      ],
+      "confusion_matrix": {
+        "fn": 8,
+        "fp": 160,
+        "tn": 300,
+        "tp": 16
+      },
+      "f1": 0.16,
+      "n": 484,
+      "negative_n": 460,
+      "positive_n": 24,
+      "pr_auc": 0.080692398093404,
+      "precision": 0.09090909090909091,
+      "prevalence": 0.049586776859504134,
+      "roc_auc": 0.6577898550724638,
+      "sensitivity": 0.6666666666666666,
+      "specificity": 0.6521739130434783,
+      "threshold": 0.5231592833915664
+    },
+    "xgboost": {
+      "brier_score": 0.1971133997082476,
+      "calibration_curve": [
+        {
+          "event_rate": 0.012658227848101266,
+          "lower": 0.0,
+          "mean_probability": 0.135735422372818,
+          "n": 79,
+          "upper": 0.2
+        },
+        {
+          "event_rate": 0.02702702702702703,
+          "lower": 0.2,
+          "mean_probability": 0.3004828989505768,
+          "n": 148,
+          "upper": 0.4
+        },
+        {
+          "event_rate": 0.05521472392638037,
+          "lower": 0.4,
+          "mean_probability": 0.5048941373825073,
+          "n": 163,
+          "upper": 0.6000000000000001
+        },
+        {
+          "event_rate": 0.10638297872340426,
+          "lower": 0.6000000000000001,
+          "mean_probability": 0.641973078250885,
+          "n": 94,
+          "upper": 0.8
+        },
+        {
+          "event_rate": null,
+          "lower": 0.8,
+          "mean_probability": null,
+          "n": 0,
+          "upper": 1.0
+        }
+      ],
+      "confusion_matrix": {
+        "fn": 14,
+        "fp": 73,
+        "tn": 387,
+        "tp": 10
+      },
+      "f1": 0.18691588785046728,
+      "n": 484,
+      "negative_n": 460,
+      "positive_n": 24,
+      "pr_auc": 0.11736150433888345,
+      "precision": 0.12048192771084337,
+      "prevalence": 0.049586776859504134,
+      "roc_auc": 0.6943840579710145,
+      "sensitivity": 0.4166666666666667,
+      "specificity": 0.841304347826087,
+      "threshold": 0.6089538335800171
+    }
+  }
+}

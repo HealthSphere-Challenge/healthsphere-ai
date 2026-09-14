@@ -571,3 +571,13 @@ uv run python scripts/analyze_ml_readiness.py data/raw/synthea_5000_reproducible
 ```
 
 The full decision and reproducible evidence are in [HS-010 ML readiness](docs/ml/HS_010_ML_READINESS.md). The large generated Synthea cohort remains ignored.
+
+## Experimental hypertension training
+
+The frozen HS-010 training pipeline predicts the experimental probability of a first recorded essential-hypertension event within five years after an eligible paired-BP encounter. Reproduce it from the documented local Synthea cohort with:
+
+```bash
+uv run python scripts/train_hypertension_model.py data/raw/synthea_5000_reproducible/csv
+```
+
+The pipeline writes versioned artifacts to `artifacts/hypertension_5y/v1/`; see [the model card](docs/evaluation/MODEL_CARD.md) and [evaluation report](docs/evaluation/HS_010_MODEL_EVALUATION.md). HealthSphere backend supplies `hypertension_features_v1`; `healthsphere-agent` does not calculate the probability. This synthetic-data model is not clinically validated and must not be used for diagnosis, treatment, emergency triage, or clinical decisions.

@@ -27,3 +27,14 @@ data/raw/synthea_5000_reproducible/
 models/*
 !models/.gitkeep
 artifacts/
+!artifacts/
+artifacts/*
+!artifacts/hypertension_5y/
+artifacts/hypertension_5y/*
+!artifacts/hypertension_5y/v1/
+!artifacts/hypertension_5y/v1/model.json
+!artifacts/hypertension_5y/v1/model.joblib
+!artifacts/hypertension_5y/v1/preprocessing.joblib
+!artifacts/hypertension_5y/v1/metadata.json
+!artifacts/hypertension_5y/v1/metrics.json
+!artifacts/hypertension_5y/v1/split_manifest.json
