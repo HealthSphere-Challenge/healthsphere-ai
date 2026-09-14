@@ -26,3 +26,4 @@ data/raw/synthea_5000_reproducible/
 .cache/
 models/*
 !models/.gitkeep
+artifacts/
