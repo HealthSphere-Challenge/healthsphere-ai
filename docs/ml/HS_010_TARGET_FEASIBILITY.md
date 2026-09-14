@@ -1,5 +1,7 @@
 # HS-010 target and feature feasibility decision
 
+**Training status: BLOCKED.** Incident essential hypertension within five years remains the preferred candidate, but it is not approved for training until the feature-availability strategy is explicitly approved.
+
 ## Method
 
 The reproducible Synthea release cohort contains 5,724 exported patient histories (5,000 alive at generation end and 724 deceased). The audit selects the first adult wellness encounter after at least one year of observable history and requires five years of subsequent encounter history. Measurements on that wellness date are eligible; later data is forbidden. Patients with the target recorded on or before index are excluded. This produces 4,162 indexed adults. The rule is useful for feasibility, but selecting patients by known future follow-up introduces a research-cohort selection effect that must be replaced by a censoring-aware policy before modeling.
