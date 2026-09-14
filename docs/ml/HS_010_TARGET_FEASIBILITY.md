@@ -1,6 +1,6 @@
 # HS-010 target and feature feasibility decision
 
-**Training status: BLOCKED.** Incident essential hypertension within five years remains the preferred candidate, but it is not approved for training until the feature-availability strategy is explicitly approved.
+**Historical Stage 6 status: BLOCKED.** This report preserves the earlier evidence and is superseded by the approved Stage 8 readiness specification in [HS-010 ML readiness](HS_010_ML_READINESS.md).
 
 ## Method
 

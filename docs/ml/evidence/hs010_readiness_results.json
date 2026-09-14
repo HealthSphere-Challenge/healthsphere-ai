@@ -1,0 +1,422 @@
+{
+  "alternatives_at_selected_index": [
+    {
+      "all_proposed_feature_complete_n": 1935,
+      "bp_complete_n": 1950,
+      "censored_n": 431,
+      "eligible_n": 1950,
+      "excluded_prior_n": 2230,
+      "feature_availability": {
+        "blood_glucose": {
+          "available_n": 616,
+          "available_pct": 31.59,
+          "missing_pct": 68.41,
+          "units": {
+            "mg/dL": 616
+          }
+        },
+        "bmi": {
+          "available_n": 1935,
+          "available_pct": 99.23,
+          "missing_pct": 0.77,
+          "units": {
+            "kg/m2": 1935
+          }
+        },
+        "diastolic_blood_pressure": {
+          "available_n": 1950,
+          "available_pct": 100.0,
+          "missing_pct": 0.0,
+          "units": {
+            "mm[Hg]": 1950
+          }
+        },
+        "heart_rate": {
+          "available_n": 1945,
+          "available_pct": 99.74,
+          "missing_pct": 0.26,
+          "units": {
+            "/min": 1945
+          }
+        },
+        "smoking_status": {
+          "available_n": 1935,
+          "available_pct": 99.23,
+          "missing_pct": 0.77,
+          "units": {
+            "(blank)": 1935
+          }
+        },
+        "systolic_blood_pressure": {
+          "available_n": 1950,
+          "available_pct": 100.0,
+          "missing_pct": 0.0,
+          "units": {
+            "mm[Hg]": 1950
+          }
+        },
+        "weight": {
+          "available_n": 1935,
+          "available_pct": 99.23,
+          "missing_pct": 0.77,
+          "units": {
+            "kg": 1935
+          }
+        }
+      },
+      "indexed_n": 4611,
+      "median_available_follow_up_years": 9.14,
+      "negative_n": 1673,
+      "positive_all_proposed_feature_complete_n": 276,
+      "positive_bp_complete_n": 277,
+      "positive_n": 277,
+      "prevalence": 0.1421,
+      "strategy": "C",
+      "target": "obesity_finding"
+    },
+    {
+      "all_proposed_feature_complete_n": 3863,
+      "bp_complete_n": 3883,
+      "censored_n": 449,
+      "eligible_n": 3883,
+      "excluded_prior_n": 279,
+      "feature_availability": {
+        "blood_glucose": {
+          "available_n": 1742,
+          "available_pct": 44.86,
+          "missing_pct": 55.14,
+          "units": {
+            "mg/dL": 1742
+          }
+        },
+        "bmi": {
+          "available_n": 3863,
+          "available_pct": 99.48,
+          "missing_pct": 0.52,
+          "units": {
+            "kg/m2": 3863
+          }
+        },
+        "diastolic_blood_pressure": {
+          "available_n": 3883,
+          "available_pct": 100.0,
+          "missing_pct": 0.0,
+          "units": {
+            "mm[Hg]": 3883
+          }
+        },
+        "heart_rate": {
+          "available_n": 3874,
+          "available_pct": 99.77,
+          "missing_pct": 0.23,
+          "units": {
+            "/min": 3874
+          }
+        },
+        "smoking_status": {
+          "available_n": 3863,
+          "available_pct": 99.48,
+          "missing_pct": 0.52,
+          "units": {
+            "(blank)": 3863
+          }
+        },
+        "systolic_blood_pressure": {
+          "available_n": 3883,
+          "available_pct": 100.0,
+          "missing_pct": 0.0,
+          "units": {
+            "mm[Hg]": 3883
+          }
+        },
+        "weight": {
+          "available_n": 3863,
+          "available_pct": 99.48,
+          "missing_pct": 0.52,
+          "units": {
+            "kg": 3863
+          }
+        }
+      },
+      "indexed_n": 4611,
+      "median_available_follow_up_years": 9.14,
+      "negative_n": 3819,
+      "positive_all_proposed_feature_complete_n": 64,
+      "positive_bp_complete_n": 64,
+      "positive_n": 64,
+      "prevalence": 0.0165,
+      "strategy": "C",
+      "target": "type_2_diabetes"
+    }
+  ],
+  "index_investigation": {
+    "duplicate_target_patient_n": {
+      "essential_hypertension": 0,
+      "obesity_finding": 11,
+      "type_2_diabetes": 0
+    },
+    "selected_target_event_delay_days": {
+      "median": 1099,
+      "minimum": 1,
+      "within_30_days_n": 1,
+      "within_365_days_n": 4
+    },
+    "strategy_a_next_bp_delay_days_median": 7808.5,
+    "strategy_a_patients_with_later_bp_n": 4162,
+    "strategy_c_encounter_classes": {
+      "ambulatory": 7,
+      "emergency": 31,
+      "outpatient": 276,
+      "urgentcare": 130,
+      "wellness": 4167
+    },
+    "strategy_c_observation_temporal_relation": {
+      "within_encounter": 29822
+    },
+    "strategy_c_same_encounter_availability_pct": {
+      "blood_glucose": 43.57,
+      "bmi": 99.5,
+      "diastolic_blood_pressure": 100.0,
+      "heart_rate": 99.8,
+      "smoking_status": 99.5,
+      "systolic_blood_pressure": 100.0,
+      "weight": 99.5
+    }
+  },
+  "patient_rows": 5724,
+  "strategies": [
+    {
+      "all_proposed_feature_complete_n": 337,
+      "bp_complete_n": 337,
+      "censored_n": 0,
+      "eligible_n": 4072,
+      "excluded_prior_n": 90,
+      "feature_availability": {
+        "blood_glucose": {
+          "available_n": 7,
+          "available_pct": 0.17,
+          "missing_pct": 99.83,
+          "units": {
+            "mg/dL": 7
+          }
+        },
+        "bmi": {
+          "available_n": 337,
+          "available_pct": 8.28,
+          "missing_pct": 91.72,
+          "units": {
+            "kg/m2": 337
+          }
+        },
+        "diastolic_blood_pressure": {
+          "available_n": 337,
+          "available_pct": 8.28,
+          "missing_pct": 91.72,
+          "units": {
+            "mm[Hg]": 337
+          }
+        },
+        "heart_rate": {
+          "available_n": 337,
+          "available_pct": 8.28,
+          "missing_pct": 91.72,
+          "units": {
+            "/min": 337
+          }
+        },
+        "smoking_status": {
+          "available_n": 337,
+          "available_pct": 8.28,
+          "missing_pct": 91.72,
+          "units": {
+            "(blank)": 337
+          }
+        },
+        "systolic_blood_pressure": {
+          "available_n": 337,
+          "available_pct": 8.28,
+          "missing_pct": 91.72,
+          "units": {
+            "mm[Hg]": 337
+          }
+        },
+        "weight": {
+          "available_n": 337,
+          "available_pct": 8.28,
+          "missing_pct": 91.72,
+          "units": {
+            "kg": 337
+          }
+        }
+      },
+      "indexed_n": 4162,
+      "median_available_follow_up_years": 29.92,
+      "negative_n": 3980,
+      "positive_all_proposed_feature_complete_n": 7,
+      "positive_bp_complete_n": 7,
+      "positive_n": 92,
+      "prevalence": 0.0226,
+      "strategy": "A",
+      "target": "essential_hypertension"
+    },
+    {
+      "all_proposed_feature_complete_n": 301,
+      "bp_complete_n": 301,
+      "censored_n": 445,
+      "eligible_n": 4125,
+      "excluded_prior_n": 41,
+      "feature_availability": {
+        "blood_glucose": {
+          "available_n": 4,
+          "available_pct": 0.1,
+          "missing_pct": 99.9,
+          "units": {
+            "mg/dL": 4
+          }
+        },
+        "bmi": {
+          "available_n": 301,
+          "available_pct": 7.3,
+          "missing_pct": 92.7,
+          "units": {
+            "kg/m2": 301
+          }
+        },
+        "diastolic_blood_pressure": {
+          "available_n": 301,
+          "available_pct": 7.3,
+          "missing_pct": 92.7,
+          "units": {
+            "mm[Hg]": 301
+          }
+        },
+        "heart_rate": {
+          "available_n": 301,
+          "available_pct": 7.3,
+          "missing_pct": 92.7,
+          "units": {
+            "/min": 301
+          }
+        },
+        "smoking_status": {
+          "available_n": 301,
+          "available_pct": 7.3,
+          "missing_pct": 92.7,
+          "units": {
+            "(blank)": 301
+          }
+        },
+        "systolic_blood_pressure": {
+          "available_n": 301,
+          "available_pct": 7.3,
+          "missing_pct": 92.7,
+          "units": {
+            "mm[Hg]": 301
+          }
+        },
+        "weight": {
+          "available_n": 301,
+          "available_pct": 7.3,
+          "missing_pct": 92.7,
+          "units": {
+            "kg": 301
+          }
+        }
+      },
+      "indexed_n": 4611,
+      "median_available_follow_up_years": 28.73,
+      "negative_n": 4036,
+      "positive_all_proposed_feature_complete_n": 6,
+      "positive_bp_complete_n": 6,
+      "positive_n": 89,
+      "prevalence": 0.0216,
+      "strategy": "B",
+      "target": "essential_hypertension"
+    },
+    {
+      "all_proposed_feature_complete_n": 3213,
+      "bp_complete_n": 3224,
+      "censored_n": 448,
+      "eligible_n": 3224,
+      "excluded_prior_n": 939,
+      "feature_availability": {
+        "blood_glucose": {
+          "available_n": 1331,
+          "available_pct": 41.28,
+          "missing_pct": 58.72,
+          "units": {
+            "mg/dL": 1331
+          }
+        },
+        "bmi": {
+          "available_n": 3213,
+          "available_pct": 99.66,
+          "missing_pct": 0.34,
+          "units": {
+            "kg/m2": 3213
+          }
+        },
+        "diastolic_blood_pressure": {
+          "available_n": 3224,
+          "available_pct": 100.0,
+          "missing_pct": 0.0,
+          "units": {
+            "mm[Hg]": 3224
+          }
+        },
+        "heart_rate": {
+          "available_n": 3222,
+          "available_pct": 99.94,
+          "missing_pct": 0.06,
+          "units": {
+            "/min": 3222
+          }
+        },
+        "smoking_status": {
+          "available_n": 3213,
+          "available_pct": 99.66,
+          "missing_pct": 0.34,
+          "units": {
+            "(blank)": 3213
+          }
+        },
+        "systolic_blood_pressure": {
+          "available_n": 3224,
+          "available_pct": 100.0,
+          "missing_pct": 0.0,
+          "units": {
+            "mm[Hg]": 3224
+          }
+        },
+        "weight": {
+          "available_n": 3213,
+          "available_pct": 99.66,
+          "missing_pct": 0.34,
+          "units": {
+            "kg": 3213
+          }
+        }
+      },
+      "indexed_n": 4611,
+      "median_available_follow_up_years": 9.14,
+      "negative_n": 3065,
+      "positive_all_proposed_feature_complete_n": 159,
+      "positive_bp_complete_n": 159,
+      "positive_n": 159,
+      "prevalence": 0.0493,
+      "strategy": "C",
+      "target": "essential_hypertension"
+    }
+  ],
+  "target_systems": {
+    "essential_hypertension": [
+      "SNOMED-CT"
+    ],
+    "obesity_finding": [
+      "SNOMED-CT"
+    ],
+    "type_2_diabetes": [
+      "SNOMED-CT"
+    ]
+  }
+}

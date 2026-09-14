@@ -1,0 +1,69 @@
+{
+  "status": "approved_for_training",
+  "target_id": "incident_essential_hypertension_5y",
+  "target_version": "incident_essential_hypertension_5y_v1",
+  "feature_schema_version": "hypertension_features_v1",
+  "intended_question": "Given information legitimately available about an eligible adult at the index encounter, estimate the experimental probability of a first recorded essential-hypertension event within the following five years.",
+  "population": {
+    "minimum_age_years": 18,
+    "minimum_observable_history_days": 365,
+    "index_requirement": "first eligible encounter containing a paired systolic and diastolic blood-pressure observation",
+    "dataset": "Synthea Massachusetts synthetic CSV cohort; requested 5000 living patients, 5724 exported histories"
+  },
+  "index": {
+    "strategy": "C",
+    "timestamp": "calendar day of the qualifying encounter stop",
+    "same_encounter_rule": "observations linked to the qualifying encounter and dated no later than encounter stop are available",
+    "selection_uses_future_data": false
+  },
+  "lookback": {
+    "days": 365,
+    "start_inclusive": true,
+    "end_inclusive": true,
+    "latest_observation_per_feature": true
+  },
+  "horizon": { "days": 1825, "start_exclusive": true, "end_inclusive": true },
+  "target_event": {
+    "terminology": "SNOMED-CT",
+    "codes": ["59621000"],
+    "meaning": "first recorded essential hypertension condition",
+    "duplicate_policy": "deduplicate to earliest qualifying condition date"
+  },
+  "exclusions_and_censoring": {
+    "exclude_target_at_or_before_index": true,
+    "positive": "first target event occurs after index and within 1825 days",
+    "negative": "no target event in the horizon and encounter record extends through the horizon",
+    "censored": "no event and record/death ends before the horizon",
+    "deceased": "eligible when follow-up is sufficient or the event precedes death; otherwise censored"
+  },
+  "features": [
+    { "name": "age_years", "type": "float", "unit": "years", "required": true, "source": "patients.BIRTHDATE", "runtime_source": "profile.date_of_birth", "transformation": "whole elapsed years at index; serialize as numeric", "missing": "ineligible" },
+    { "name": "sex_at_birth", "type": "categorical", "unit": null, "required": false, "source": "patients.GENDER", "runtime_source": "profile.sex_at_birth", "allowed_categories": ["female", "male", "unknown"], "transformation": "Synthea F/M to female/male; intersex, prefer_not_to_say and null to unknown", "missing": "explicit unknown category fitted within training pipeline" },
+    { "name": "systolic_blood_pressure", "type": "integer", "unit": "mmHg", "required": true, "source": "observations LOINC 8480-6 in mm[Hg]", "runtime_source": "latest paired blood_pressure measurement", "transformation": "latest in lookback; unit spelling normalized only", "missing": "ineligible" },
+    { "name": "diastolic_blood_pressure", "type": "integer", "unit": "mmHg", "required": true, "source": "observations LOINC 8462-4 in mm[Hg]", "runtime_source": "same latest paired blood_pressure measurement", "transformation": "latest in lookback; unit spelling normalized only", "missing": "ineligible" },
+    { "name": "heart_rate", "type": "integer", "unit": "bpm", "required": false, "source": "observations LOINC 8867-4 in /min", "runtime_source": "latest heart_rate measurement", "transformation": "latest in lookback; /min normalized to bpm", "missing": "training-median imputation plus missing indicator" },
+    { "name": "bmi", "type": "float", "unit": "kg/m2", "required": false, "source": "observations LOINC 39156-5 in kg/m2", "runtime_source": "backend-derived BMI from authoritative height and latest weight", "transformation": "latest in lookback; no client-submitted BMI", "missing": "training-median imputation plus missing indicator" },
+    { "name": "smoking_status", "type": "categorical", "unit": null, "required": false, "source": "observations LOINC 72166-2", "runtime_source": "profile.smoking_status", "allowed_categories": ["never", "former", "current", "unknown"], "transformation": "Never smoked tobacco→never; Ex-smoker→former; Smokes tobacco daily→current", "missing": "explicit unknown category fitted within training pipeline" }
+  ],
+  "excluded_candidate_features": {
+    "weight": "excluded from v1 because BMI carries the same body-size signal and avoids redundant correlated inputs",
+    "blood_glucose": "58.72% missing at selected index and not necessary for the target question",
+    "sleep_duration": "not emitted by this Synthea generation under the runtime code",
+    "physical_activity_duration": "not emitted by this Synthea generation under the runtime code",
+    "prior_conditions": "no reviewed, frozen crosswalk from Synthea codes to the current runtime structured history"
+  },
+  "missingness_policy": {
+    "fit_scope": "all learned imputation and encoding parameters fit on training only",
+    "required_features": "reject/ineligible when absent",
+    "optional_numeric": "median imputation with explicit missing indicator",
+    "optional_categorical": "explicit unknown category",
+    "zero_is_missing": false,
+    "complete_case_deletion": false
+  },
+  "leakage_blacklist": ["patient_id", "encounter_id", "claim_id", "target_diagnosis_at_or_before_index", "post_index_conditions", "post_index_observations", "post_index_medications", "post_index_procedures", "future_encounters", "future_claims", "future_complications", "outcome_derived_variables", "record_end_date", "follow_up_duration"],
+  "split": { "unit": "patient", "seed": 20260915, "ratios": { "train": 0.70, "validation": 0.15, "test": 0.15 }, "stratify_target": true, "expected_positive_counts": { "train": 111, "validation": 24, "test": 24 }, "patient_overlap_allowed": false },
+  "imbalance": { "primary_strategy": "training-fold class weighting", "xgboost": "derive scale_pos_weight from training negatives/positives only", "smote_default": false, "threshold_source": "validation only" },
+  "models": { "baseline_0": "DummyClassifier(strategy=prior)", "baseline_1": "LogisticRegression with class weighting", "candidate": "XGBoost binary classifier" },
+  "evaluation": { "primary_metric": "PR-AUC", "metrics": ["prevalence", "confusion_matrix", "sensitivity", "specificity", "precision", "f1", "roc_auc", "pr_auc", "brier_score"], "calibration": "reliability curve and Brier score; calibration method considered using validation only", "threshold": "choose on validation using a predeclared sensitivity/precision utility; never optimize on test", "uncertainty": "patient-level stratified bootstrap 95% confidence intervals on the untouched test set; report unstable or undefined estimates" },
+  "artifact_expectations": { "directory": "artifacts/hypertension_5y/v1", "files": ["model.json", "preprocessing.joblib", "metadata.json", "metrics.json"], "stage_8_creates_model_artifacts": false }
+}
