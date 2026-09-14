@@ -95,6 +95,17 @@ class Dataset:
     target_systems: dict[str, set[str]]
 
 
+@dataclass(frozen=True)
+class CohortRow:
+    """One frozen Strategy-C patient row; identifiers are audit fields only."""
+
+    patient_id: str
+    index_date: date
+    target: int
+    features: dict[str, float | str | None]
+    feature_dates: dict[str, date]
+
+
 def load_dataset(root: Path) -> Dataset:
     """Load only fields needed by the readiness audit from Synthea CSV."""
     patients = {}
@@ -251,6 +262,67 @@ def extract_latest_features(
             if current is None or observation.observed_at >= current.observed_at:
                 latest[observation.feature] = observation
     return latest
+
+
+def _age_years(birth_date: date, index_date: date) -> int:
+    return (
+        index_date.year
+        - birth_date.year
+        - ((index_date.month, index_date.day) < (birth_date.month, birth_date.day))
+    )
+
+
+def _sex(value: str) -> str:
+    return {"F": "female", "M": "male"}.get(value, "unknown")
+
+
+def _smoking(value: str) -> str:
+    normalized = value.strip().lower()
+    if "never" in normalized:
+        return "never"
+    if "ex-smoker" in normalized or "former" in normalized:
+        return "former"
+    if "smokes tobacco" in normalized or "current" in normalized:
+        return "current"
+    return "unknown"
+
+
+def build_hypertension_cohort(dataset: Dataset) -> list[CohortRow]:
+    """Build the approved, labeled feature cohort without model-time information."""
+    indexes = assign_indexes(dataset, "C")
+    labels, _, _ = label_patients(dataset, indexes, "essential_hypertension")
+    rows = []
+    for patient_id in sorted(labels):
+        index_date = indexes[patient_id]
+        observations = extract_latest_features(dataset, patient_id, index_date)
+        required = {"systolic_blood_pressure", "diastolic_blood_pressure"}
+        if not required <= observations.keys():
+            raise ValueError(f"Required feature missing for eligible patient {patient_id}")
+        patient = dataset.patients[patient_id]
+        features: dict[str, float | str | None] = {
+            "age_years": float(_age_years(patient.birth_date, index_date)),
+            "sex_at_birth": _sex(patient.sex),
+            "systolic_blood_pressure": float(observations["systolic_blood_pressure"].value),
+            "diastolic_blood_pressure": float(observations["diastolic_blood_pressure"].value),
+            "heart_rate": None,
+            "bmi": None,
+            "smoking_status": "unknown",
+        }
+        for name in ("heart_rate", "bmi"):
+            if name in observations:
+                features[name] = float(observations[name].value)
+        if "smoking_status" in observations:
+            features["smoking_status"] = _smoking(observations["smoking_status"].value)
+        rows.append(
+            CohortRow(
+                patient_id=patient_id,
+                index_date=index_date,
+                target=labels[patient_id],
+                features=features,
+                feature_dates={name: item.observed_at for name, item in observations.items()},
+            )
+        )
+    return rows
 
 
 def audit_strategy(dataset: Dataset, strategy: str, target_name: str) -> dict[str, object]:
