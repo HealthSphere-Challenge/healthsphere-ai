@@ -591,7 +591,7 @@ prediction route exists. Configure an opaque service credential and start the AP
 
 ```bash
 export HEALTHSPHERE_INTERNAL_API_TOKEN='replace-with-a-real-secret'
-uv run uvicorn healthsphere_ai.api:app --host 127.0.0.1 --port 8001
+uv run uvicorn --app-dir src healthsphere_ai.api:app --host 127.0.0.1 --port 8001
 ```
 
 Readiness is available at `GET /health`. Startup loads the native XGBoost model and trusted
